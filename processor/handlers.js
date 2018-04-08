@@ -31,7 +31,7 @@ const createAsset = (asset, owner, state) => {
       }
 
       return state.set({
-        [address]: encode({name: asset, owner,car:"hi", van:"fren",stuff:"how you doing"})
+        [address]: encode({name: asset, owner,car:"hi", van:"fren",stuff:"how you doing1"})
       })
     })
 }
