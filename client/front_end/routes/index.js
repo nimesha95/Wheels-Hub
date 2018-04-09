@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+const {
+	submitUpdate
+} = require('../helpers/helpers')
+
 // Get Homepage
 router.get('/', ensureAuthenticated, function (req, res) {
 	res.render('index');
@@ -29,8 +33,13 @@ function ensureAuthenticated(req, res, next) {
 
 router.post('/register_vehicle', function (req, res) {
 	console.log(req.body.vehicle_no);
-
-
+/*
+	submitUpdate(
+		{ action, asset, owner },
+		this.user.private,
+		success => success ? this.refresh() : null
+	)
+*/
 	req.flash('success_msg', 'You have successfully added the vehicle');
 	res.redirect('/register_vehicle');
 });
