@@ -31,6 +31,9 @@ const createAsset = (asset, owner, state) => {
       }
 
       return state.set({
+        /*
+        This place handles the logic for submission
+        */ 
         [address]: encode({name: asset, owner,car:"hi", van:"fren",stuff:"how you doing1"})
       })
     })
