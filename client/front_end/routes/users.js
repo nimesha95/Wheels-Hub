@@ -101,7 +101,7 @@ router.post('/login',
 	});
 
 router.get('/logout', function (req, res) {
-	console.log("hehe-->"+req.user.public_key);
+	//console.log("hehe-->"+req.user.public_key);
 	req.logout();
 
 	req.flash('success_msg', 'You are logged out');

@@ -1,13 +1,13 @@
 {
-  "name": "loginapp",
+  "name": "wheelshub",
   "version": "1.0.0",
-  "description": "Simple authentication system",
+  "description": "Front end for blockchain based vehicle management system",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Brad Traversy",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
