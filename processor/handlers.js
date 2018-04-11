@@ -22,7 +22,7 @@ const decode = buf => JSON.parse(buf.toString())
 // Add a new asset to state
 const createAsset = (asset, owner, state) => {
   const address = getAssetAddress(asset)
-  console.log("stuff-->"+asset+" state-->"+state+" owner-->"+owner+" address-->"+address);
+  //console.log("stuff-->"+asset+" state-->"+state+" owner-->"+owner+" address-->"+address);
   return state.get([address])
     .then(entries => {
       const entry = entries[address]

@@ -19,11 +19,13 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "jquery": "^3.3.1",
     "mongodb": "*",
     "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
+    "request": "^2.85.0",
     "sawtooth-sdk": "^0.8.1"
   }
 }
