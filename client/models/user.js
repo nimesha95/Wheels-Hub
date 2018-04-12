@@ -22,6 +22,9 @@ var UserSchema = mongoose.Schema({
 	private_key: {
 		type: String
 	},
+	user_type:{
+		type: String
+	}
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

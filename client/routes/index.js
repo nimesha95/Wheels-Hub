@@ -12,7 +12,15 @@ const app = { user: null, keys: [], assets: [], transfers: [] }
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function (req, res) {
-	res.render('index');
+	if(req.user.user_type=="rmv"){
+		res.render('index');
+	}
+	else if(req.user.user_type=="insurance"){
+		res.render('insurance');
+	}
+	else if(req.user.user_type=="gen_user"){
+		res.render('gen_user');
+	}
 });
 
 //Get Register vehicle page
