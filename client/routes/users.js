@@ -29,7 +29,7 @@ router.post('/register', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
-
+	var user_type = 'gen_user';
 	var keys = makeKeyPair();	//generate public private key pair for the user
 
 	// Validation
@@ -53,7 +53,8 @@ router.post('/register', function (req, res) {
 			username: username,
 			password: password,
 			public_key: keys.public,
-			private_key: keys.private
+			private_key: keys.private,
+			user_type: user_type
 		});
 
 		User.createUser(newUser, function (err, user) {
