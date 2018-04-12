@@ -20,9 +20,8 @@ const encode = obj => Buffer.from(JSON.stringify(obj, Object.keys(obj).sort()))
 const decode = buf => JSON.parse(buf.toString())
 
 // Add a new asset to state
-const createAsset = (asset, owner, state) => {
+const createAsset = (asset, owner, chasis_no, state) => {
   const address = getAssetAddress(asset)
-  //console.log("stuff-->"+asset+" state-->"+state+" owner-->"+owner+" address-->"+address);
   return state.get([address])
     .then(entries => {
       const entry = entries[address]
@@ -34,7 +33,8 @@ const createAsset = (asset, owner, state) => {
         /*
         This place handles the logic for submission
         */ 
-        [address]: encode({name: asset, owner,car:"hi", van:"fren",stuff:"how you doing1"})
+        [address]: encode({name: asset, owner, chasis_no})
+        //[address]: encode({name: asset, owner})
       })
     })
 }
@@ -118,14 +118,14 @@ class JSONHandler extends TransactionHandler {
     // Parse the transaction header and payload
     const header = TransactionHeader.decode(txn.header)
     const signer = header.signerPubkey
-    const { action, asset, owner } = JSON.parse(txn.payload)
+    const { action, asset, owner,chasis_no } = JSON.parse(txn.payload)
 
     // Call the appropriate function based on the payload's action
     console.log(`Handling transaction:  ${action} > ${asset}`,
                 owner ? `> ${owner.slice(0, 8)}... ` : '',
                 `:: ${signer.slice(0, 8)}...`)
 
-    if (action === 'create') return createAsset(asset, signer, state)
+    if (action === 'create') return createAsset(asset, signer, chasis_no, state)
     if (action === 'transfer') return transferAsset(asset, owner, signer, state)
     if (action === 'accept') return acceptTransfer(asset, signer, state)
     if (action === 'reject') return rejectTransfer(asset, signer, state)

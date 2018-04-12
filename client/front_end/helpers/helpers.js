@@ -36,6 +36,7 @@ const submitUpdate = (payload, privateKey, cb) => {
     headers: {
       "content-type": "application/octet-stream",  // <--Very important!!!
     },
+    processData: false,
     body: batchBytes
   }, function (error, response, body) {
     console.log(response);

@@ -49,15 +49,15 @@ router.post('/register_vehicle', function (req, res) {
 		)
 	})
 	*/
-	test(req);
-	//req.flash('success_msg', req.user.public_key);
+	RegVehicle(req,req.body.vehicle_no,req.body.chasis_no);
+	//req.flash('success_msg', req.body.vehicle_no);
 	res.redirect('/register_vehicle');
 });
 
-function test(req){
+function RegVehicle(req,asset,chasis_no){
 	req.flash('success_msg', 'hey there we call this function');
 	submitUpdate(
-		{ action: 'create', asset: 'hello', owner: 'whatsapp' },
+		{ action: 'create', asset , chasis_no, owner: req.user.public_key },
 		req.user.private_key,
 		success => success ? this.refresh() : null
 	)
