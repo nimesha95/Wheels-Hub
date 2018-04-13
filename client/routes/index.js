@@ -34,6 +34,15 @@ router.get('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 	res.render('transfer_vehicle');
 });
 
+
+//get insurance claim page
+router.get('/insurance_claim', ensureAuthenticated, function (req, res) {
+	res.render('insurance_claim');
+});
+
+
+
+
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
