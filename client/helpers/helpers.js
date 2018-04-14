@@ -19,7 +19,6 @@ const PREFIX = '19d832'
 
 
 const submitUpdate = (payload, privateKey, cb) => {
-  console.log("sup-->" + payload);
   const transaction = new TransactionEncoder(privateKey, {
     inputs: [PREFIX],
     outputs: [PREFIX],
@@ -39,21 +38,12 @@ const submitUpdate = (payload, privateKey, cb) => {
     processData: false,
     body: batchBytes
   }, function (error, response, body) {
-    console.log(response);
+    console.log(response.body);
   });
-/*
-  $.post({
-    url: `${API_URL}/batches?wait`,
-    data: batchBytes,
-    headers: { 'Content-Type': 'application/octet-stream' },
-    processData: false,
-    // Any data object indicates the Batch was not committed
-    success: ({ data }) => cb(!data),
-    //error: () => cb(false)
-    error: (data) => console.log(data)
-  })
-  */
 }
+
+
+
 
 module.exports = {
   submitUpdate
