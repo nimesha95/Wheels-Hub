@@ -73,7 +73,8 @@ function RegVehicle(req, asset, vehicle_info) {
 	submitUpdate(
 		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },
 		req.user.private_key,
-		success => success ? this.refresh() : null
+		success => success ? this.refresh() : null,
+		asset
 	)
 }
 
