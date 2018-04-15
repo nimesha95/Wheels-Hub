@@ -69,14 +69,6 @@ function RegVehicle(req, asset, vehicle_info) {
 		req.user.private_key,
 		success => success ? this.refresh() : null
 	)
-
-	/*
-	submitUpdate(
-		{ action: 'create', asset , chasis_no, owner: req.user.public_key },
-		req.user.private_key,
-		success => success ? this.refresh() : null
-	)
-	*/
 }
 
 

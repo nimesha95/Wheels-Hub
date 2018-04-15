@@ -30,7 +30,7 @@ const submitUpdate = (payload, privateKey, cb) => {
   const batchBytes = new BatchEncoder(privateKey).createEncoded(transaction)
 
   request({
-    url: API_URL+'/batches?wait',
+    url: API_URL + '/batches?wait',
     method: "POST",
     headers: {
       "content-type": "application/octet-stream",  // <--Very important!!!
@@ -38,7 +38,12 @@ const submitUpdate = (payload, privateKey, cb) => {
     processData: false,
     body: batchBytes
   }, function (error, response, body) {
-    console.log(response.body);
+    try {
+      console.log(response.body);
+    }
+    catch (err) {
+      console.log("some error occured submitting the data");
+    }
   });
 }
 
