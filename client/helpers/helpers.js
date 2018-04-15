@@ -9,6 +9,8 @@ const {
   TransactionEncoder
 } = require('sawtooth-sdk/client')
 
+var Vehicle = require('../models/vehicles');
+
 // Config variables
 const KEY_NAME = 'transfer-chain.keys'
 const API_URL = 'http://localhost:8008'
@@ -18,7 +20,7 @@ const VERSION = '0.0'
 const PREFIX = '19d832'
 
 
-const submitUpdate = (payload, privateKey, cb) => {
+const submitUpdate = (payload, privateKey, cb,vehicle_name) => {
   const transaction = new TransactionEncoder(privateKey, {
     inputs: [PREFIX],
     outputs: [PREFIX],
@@ -39,7 +41,18 @@ const submitUpdate = (payload, privateKey, cb) => {
     body: batchBytes
   }, function (error, response, body) {
     try {
-      console.log(response.body);
+      var obj = JSON.parse(response.body);
+      console.log(obj.link);
+
+      var newVehicle = new Vehicle({
+        vehicle_no: vehicle_name,
+        link: obj.link
+      });
+
+      Vehicle.createVehicle(newVehicle, function (err, user) {
+        if (err) throw err;
+      });
+
     }
     catch (err) {
       console.log("some error occured submitting the data");
