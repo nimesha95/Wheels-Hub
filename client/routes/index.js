@@ -16,10 +16,10 @@ router.get('/', ensureAuthenticated, function (req, res) {
 		res.render('RMV/index');
 	}
 	else if (req.user.user_type == "insurance") {
-		res.render('insurance');
+		res.render('Insurance/insurance');
 	}
 	else if (req.user.user_type == "gen_user") {
-		res.render('gen_user');
+		res.render('Normal_user/gen_user');
 	}
 });
 
@@ -37,7 +37,7 @@ router.get('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 
 //get insurance claim page
 router.get('/insurance_claim', ensureAuthenticated, function (req, res) {
-	res.render('insurance_claim');
+	res.render('Insurance/insurance_claim');
 });
 
 
@@ -61,9 +61,6 @@ router.post('/register_vehicle', function (req, res) {
 
 
 function RegVehicle(req, asset, vehicle_info) {
-
-
-	//var asset = req.body.vehicle_no;
 	var vehicle_info = {
 		"vehicle": {
 			"chasis_no": req.body.chasis_no, "vehicle_no": req.body.vehicle_no,
@@ -71,8 +68,8 @@ function RegVehicle(req, asset, vehicle_info) {
 			"engine_no": req.body.engine_no, "color": req.body.color
 		}
 	}
-	//vehicle_info = JSON.stringify(vehicle_info)
-	req.flash('success_msg', vehicle_info.vehicle);
+
+	req.flash('success_msg', "successfully added: "+asset);
 	submitUpdate(
 		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },
 		req.user.private_key,
