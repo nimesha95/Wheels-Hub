@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nimesha95/Wheels-Hub.svg?branch=master)](https://travis-ci.org/nimesha95/Wheels-Hub)
+
 # Wheels-Hub
 A platform that uses blockchain technology to store the information about 
 vehicles, their insuarace claims
