@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var request = require('request');
 const $ = require('jquery')
 const {
 	submitUpdate
@@ -33,17 +34,38 @@ router.get('/register_vehicle', ensureAuthenticated, function (req, res) {
 
 //Get Tranfer vehicle page
 router.get('/transfer_vehicle', ensureAuthenticated, function (req, res) {
-	/*
-		Vehicle.findOne({vehicle_no:'hello'}, function(err, result) {
-			if (err) throw err;
-			console.log(result.link);
-		  });
-	*/
 	res.render('RMV/transfer_vehicle');
 });
 
 router.get('/transfer_vehicle_info', ensureAuthenticated, function (req, res) {
-	res.render('RMV/transfer_vehicle_info');
+	console.log("he he-->" + req.query.link);
+	var res_link = req.query.link;
+	request({
+		url: res_link,
+		method: "GET"
+	}, function (error, response, body) {
+		try {
+			var obj = JSON.parse(response.body);
+			/*
+						Object.keys(obj.data).forEach(function(key){
+							console.log('key:' + key);
+						})
+			*/
+			var payload = obj.data[0].transactions[0].payload;
+			console.log("payload in base64--> " + payload);
+
+			var decoded = new Buffer(payload, 'base64').toString('ascii');
+
+			//here we decode the response we get from the backend
+			var decoded = JSON.parse(decoded);
+			console.log("payload in text-->" + decoded.vehicle_info.vehicle.chasis_no);
+
+			res.render('RMV/transfer_vehicle_info', { vehicle: decoded });
+		}
+		catch (err) {
+			console.log(err);
+		}
+	});
 });
 
 router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
@@ -52,14 +74,24 @@ router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 	var vehicle_no = req.body.vehicleno
 
 	var tot = dir + english_no + vehicle_no;
-	
+
 	Vehicle.findOne({ vehicle_no: tot }, function (err, result) {
 		if (err) throw err;
 		console.log(result.link);
-		var res_link = result.link+" ";
-		req.flash('success_msg', res_link);
-		res.redirect('/transfer_vehicle_info');
+		var res_link = result.link + " ";
+		
+		try {
+			//req.flash('success_msg', decoded.vehicle_info.vehicle.chasis_no);
+			res.redirect('/transfer_vehicle_info/?link=' + res_link);
+		}
+		catch (err) {
+			req.flash('error_msg', "vehicle not found");
+			res.redirect('/transfer_vehicle');
+			console.log(err);
+		}
 	});
+
+
 
 
 });
