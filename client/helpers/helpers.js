@@ -41,6 +41,7 @@ const submitUpdate = (payload, privateKey, cb,vehicle_name) => {
     body: batchBytes
   }, function (error, response, body) {
     try {
+      //map the address with vehicle id
       var obj = JSON.parse(response.body);
       console.log(obj.link);
 
