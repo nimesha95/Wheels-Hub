@@ -52,15 +52,21 @@ router.get('/transfer_vehicle_info', ensureAuthenticated, function (req, res) {
 						})
 			*/
 			var payload = obj.data[0].transactions[0].payload;
-			console.log("payload in base64--> " + payload);
+			//console.log("payload in base64--> " + payload);
 
 			var decoded = new Buffer(payload, 'base64').toString('ascii');
 
 			//here we decode the response we get from the backend
 			var decoded = JSON.parse(decoded);
-			console.log("payload in text-->" + decoded.vehicle_info.vehicle.chasis_no);
+			
+			//filtering the json
+			delete decoded.action;
+			delete decoded.asset;
+			delete decoded.owner;
 
-			res.render('RMV/transfer_vehicle_info', { vehicle: decoded });
+			//console.log("payload in text-->" + decoded.vehicle_info.vehicle.chasis_no);
+			console.log("payload in text-->" + JSON.stringify(decoded));
+			res.render('RMV/transfer_vehicle_info', { vehicle: decoded});
 		}
 		catch (err) {
 			console.log(err);

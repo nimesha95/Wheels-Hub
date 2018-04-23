@@ -1,8 +1,14 @@
 <h2 class="page-header">Tranfer Vehicle</h2>
 {{#each vehicle}}
-        <tr>
-              <td headers="name">{{vehicle.chasis_no}}</td>
+<tr>
+        <h4>This is the vehicle information</h4>
+        <p>chasis_no: {{vehicle.chasis_no}}</p>
+        <p>reg_no: {{vehicle.vehicle_no}}</p>
+        <p>model: {{vehicle.Model}}</p>
+        <p>yom: {{vehicle.yom}}</p>
+        <p>manufacture_country: {{vehicle.manufacture_country}}</p>
+        <p>engine_no: {{vehicle.engine_no}}</p>
+        <p>color: {{vehicle.color}}</p>
+</tr>
 
-         </tr>
-
- {{/each}}
+{{/each}}
