@@ -16,3 +16,4 @@ var Vehicle = module.exports = mongoose.model('Vehicle', VehicleSchema);
 module.exports.createVehicle = function (newVehicle, callback) {
     newVehicle.save(callback);
 }
+
