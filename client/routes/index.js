@@ -6,6 +6,7 @@ var request = require('request');
 const $ = require('jquery')
 const {
 	submitUpdate,
+	submitUpdate_sync,
 	randomNameGenerator
 } = require('../helpers/helpers')
 
@@ -176,11 +177,11 @@ function RegVehicle(req, asset, vehicle_info) {
 
 function makeChanges(req, asset, vehicle_info){
 	req.flash('success_msg', "successfully added: " + asset);
-	submitUpdate(
+	submitUpdate_sync(
 		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },
 		req.user.private_key,
 		success => success ? this.refresh() : null,
-		asset
+		vehicle_info.vehicle.vehicle_no
 	)
 }
 function AddOwner(req, asset = randomNameGenerator()) {

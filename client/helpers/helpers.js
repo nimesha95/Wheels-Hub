@@ -65,7 +65,49 @@ const submitUpdate = (payload, privateKey, cb, vehicle_name) => {
   });
 }
 
-function randomNameGenerator(){
+const submitUpdate_sync = (payload, privateKey, cb, vehicle_name) => {
+  const transaction = new TransactionEncoder(privateKey, {
+    inputs: [PREFIX],
+    outputs: [PREFIX],
+    familyName: FAMILY,
+    familyVersion: VERSION,
+    payloadEncoding: 'application/json',
+    payloadEncoder: p => Buffer.from(JSON.stringify(p))
+  }).create(payload)
+  const batchBytes = new BatchEncoder(privateKey).createEncoded(transaction)
+
+  request({
+    url: API_URL + '/batches?wait',
+    method: "POST",
+    headers: {
+      "content-type": "application/octet-stream",  // <--Very important!!!
+    },
+    processData: false,
+    body: batchBytes
+  }, function (error, response, body) {
+    try {
+      //map the address with vehicle id
+      var obj = JSON.parse(response.body);
+
+      var fields = obj.link.split(/=/);
+      var id_link = fields[1];
+
+      console.log("updated link-->"+id_link);
+
+      Vehicle.update({ vehicle_no: vehicle_name }, { $set: { link: id_link } }, function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+      });
+
+    }
+    catch (err) {
+      console.log("some error occured submitting the data");
+    }
+  });
+}
+
+function randomNameGenerator() {
   var s = Math.random().toString(36).substring(2);
   return s;
 }
@@ -75,5 +117,6 @@ function randomNameGenerator(){
 
 module.exports = {
   submitUpdate,
-  randomNameGenerator
+  randomNameGenerator,
+  submitUpdate_sync
 }
