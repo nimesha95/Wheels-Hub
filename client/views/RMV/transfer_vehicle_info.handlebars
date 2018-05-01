@@ -12,3 +12,16 @@
 </tr>
 
 {{/each}}
+
+<form method="post" action="/trasfer_owner">
+  <div class="form-group">
+    <label>Owner Name</label>
+    <input type="text" class="form-control" name="owner_name" placeholder="Name of the owner">
+  </div>
+  <div class="form-group">
+    <label>NIC</label>
+    <input type="text" class="form-control" name="nic" placeholder="NIC">
+  </div>
+
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>

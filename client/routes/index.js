@@ -5,7 +5,8 @@ var router = express.Router();
 var request = require('request');
 const $ = require('jquery')
 const {
-	submitUpdate
+	submitUpdate,
+	randomNameGenerator
 } = require('../helpers/helpers')
 
 var Vehicle = require('../models/vehicles');
@@ -13,6 +14,7 @@ var Vehicle = require('../models/vehicles');
 // Application Object
 const app = { user: null, keys: [], assets: [], transfers: [] }
 
+const vehicle_global = {}
 // Get Homepage
 router.get('/', ensureAuthenticated, function (req, res) {
 	if (req.user.user_type == "rmv") {
@@ -29,17 +31,20 @@ router.get('/', ensureAuthenticated, function (req, res) {
 //Get Register vehicle page
 router.get('/register_vehicle', ensureAuthenticated, function (req, res) {
 	//console.log(req.user.public_key);
+	//console.log("test global->"+JSON.stringify(test_global));
 	res.render('RMV/register_vehicle');
 });
 
 //Get Tranfer vehicle page
 router.get('/transfer_vehicle', ensureAuthenticated, function (req, res) {
+	//test_global['testing']= {"hi":"good stuff"};
+	//console.log(JSON.stringify(test_global));
 	res.render('RMV/transfer_vehicle');
 });
 
 router.get('/transfer_vehicle_info', ensureAuthenticated, function (req, res) {
 	console.log("he he-->" + req.query.link);
-	var res_link = req.query.link;
+	var res_link = "http://localhost:8008/batches?id=" + req.query.link;
 	request({
 		url: res_link,
 		method: "GET"
@@ -58,7 +63,7 @@ router.get('/transfer_vehicle_info', ensureAuthenticated, function (req, res) {
 
 			//here we decode the response we get from the backend
 			var decoded = JSON.parse(decoded);
-			
+
 			//filtering the json
 			delete decoded.action;
 			delete decoded.asset;
@@ -66,7 +71,11 @@ router.get('/transfer_vehicle_info', ensureAuthenticated, function (req, res) {
 
 			//console.log("payload in text-->" + decoded.vehicle_info.vehicle.chasis_no);
 			console.log("payload in text-->" + JSON.stringify(decoded));
-			res.render('RMV/transfer_vehicle_info', { vehicle: decoded});
+
+			vehicle_global['info'] = decoded;
+			//console.log("global---->"+JSON.stringify(vehicle_global));
+
+			res.render('RMV/transfer_vehicle_info', { vehicle: decoded });
 		}
 		catch (err) {
 			console.log(err);
@@ -85,7 +94,7 @@ router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 		if (err) throw err;
 		console.log(result.link);
 		var res_link = result.link + " ";
-		
+
 		try {
 			//req.flash('success_msg', decoded.vehicle_info.vehicle.chasis_no);
 			res.redirect('/transfer_vehicle_info/?link=' + res_link);
@@ -124,6 +133,26 @@ router.post('/register_vehicle', function (req, res) {
 	res.redirect('/register_vehicle');
 });
 
+router.post('/trasfer_owner', function (req, res) {
+	console.log("global---->"+JSON.stringify(vehicle_global));
+	var key = ""+Date.now();
+	var owner_info = {}
+	owner_info[key] = {
+		"name": req.body.owner_name,
+		"nic": req.body.nic,
+		"timestamp": Date.now()
+	}
+	console.log("owner_info->"+JSON.stringify(owner_info));
+
+	var vehicle_info = vehicle_global.info.vehicle_info;
+	vehicle_info.owner_info[key] = owner_info;
+	console.log("haha"+JSON.stringify(vehicle_info));
+
+	makeChanges(req,vehicle_info.vehicle.vehicle_no+Math.random(),vehicle_info);
+	//AddOwner(req);
+	//req.flash('success_msg', req.body.vehicle_no);
+	res.redirect('/transfer_vehicle');
+});
 
 function RegVehicle(req, asset, vehicle_info) {
 	var vehicle_info = {
@@ -131,7 +160,9 @@ function RegVehicle(req, asset, vehicle_info) {
 			"chasis_no": req.body.chasis_no, "vehicle_no": req.body.vehicle_no,
 			"Model": req.body.Model, "yom": req.body.yom, "manufacture_country": req.body.manufacture_country,
 			"engine_no": req.body.engine_no, "color": req.body.color
-		}
+		},
+		"owner_info": {},
+		"insuarance_claims": {}
 	}
 
 	req.flash('success_msg', "successfully added: " + asset);
@@ -143,5 +174,30 @@ function RegVehicle(req, asset, vehicle_info) {
 	)
 }
 
+function makeChanges(req, asset, vehicle_info){
+	req.flash('success_msg', "successfully added: " + asset);
+	submitUpdate(
+		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },
+		req.user.private_key,
+		success => success ? this.refresh() : null,
+		asset
+	)
+}
+function AddOwner(req, asset = randomNameGenerator()) {
+	var owner_info = {
+		"owner": {
+			"name": req.body.owner_name,
+			"nic": req.body.nic
+		}
+	}
+
+	req.flash('success_msg', "owner successfully added");
+	submitUpdate(
+		{ action: 'add_vehicle_owner', asset, owner_info, owner: req.user.public_key },
+		req.user.private_key,
+		success => success ? this.refresh() : null,
+		asset
+	)
+}
 
 module.exports = router;
