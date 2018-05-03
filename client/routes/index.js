@@ -106,16 +106,6 @@ router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 			console.log(err);
 		}
 	});
-
-
-
-
-});
-
-
-//get insurance claim page
-router.get('/insurance_claim', ensureAuthenticated, function (req, res) {
-	res.render('Insurance/insurance_claim');
 });
 
 function ensureAuthenticated(req, res, next) {
