@@ -3,7 +3,7 @@
 <form method="post" action="/insurance/add_claim">
   <div class="form-group">
     <label>Policy number</label>
-    <input type="text" class="form-control" name="policy_number" placeholder="Policy number" required="">
+    <input type="text" class="form-control" name="policy_number" placeholder="Policy number" required="" maxlength="10">
   </div>
   {{#each vehicle}}
   <div class="form-group">
@@ -12,7 +12,7 @@
   </div>
   <div class="form-group">
     <label>Make and model of the vehicle</label>
-    <input type="text" class="form-control" name="model" placeholder="Make and model of the vehicle" required="" value="{{vehicle.Model}}" readonly>
+    <input type="text" class="form-control" name="model" placeholder="Make and model of the vehicle" maxlength="21" required="" value="{{vehicle.Model}}" readonly>
   </div>
   {{/each}}
   <div class="form-group">
