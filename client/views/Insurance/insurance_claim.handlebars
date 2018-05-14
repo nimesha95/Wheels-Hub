@@ -3,37 +3,37 @@
 <form method="post" action="/insurance/add_claim">
   <div class="form-group">
     <label>Policy number</label>
-    <input type="text" class="form-control" name="policy_number" placeholder="Policy number">
+    <input type="text" class="form-control" name="policy_number" placeholder="Policy number" required="">
   </div>
   {{#each vehicle}}
   <div class="form-group">
     <label>Vehicle No</label>
-    <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle No" value="{{vehicle.vehicle_no}}" readonly>
+    <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle No" required="" value="{{vehicle.vehicle_no}}" readonly>
   </div>
   <div class="form-group">
     <label>Make and model of the vehicle</label>
-    <input type="text" class="form-control" name="model" placeholder="Make and model of the vehicle" value="{{vehicle.Model}}" readonly>
+    <input type="text" class="form-control" name="model" placeholder="Make and model of the vehicle" required="" value="{{vehicle.Model}}" readonly>
   </div>
   {{/each}}
   <div class="form-group">
     <label>Brief description of how the accident took place</label>
-    <textarea class="form-control" rows="5" name="description" placeholder="description"></textarea>
+    <textarea class="form-control" rows="5" name="description" placeholder="description" required=""></textarea>
   </div>
   <div class="form-group">
     <label>Date & time of accident</label>
-    <input type="date" class="form-control" name="date" placeholder="date">
+    <input type="date" class="form-control" name="date" placeholder="date" required="">
     <br>
-    <input type="time" class="form-control" name="time" placeholder="time">
+    <input type="time" class="form-control" name="time" placeholder="time" required="">
   </div>
   <div class="form-group">
     <label>Driver name & license No</label>
-    <input type="text" class="form-control" name="name" placeholder="Driver Name">
+    <input type="text" class="form-control" name="name" placeholder="Driver Name" required="">
     <br>
-    <input type="text" class="form-control" name="license_no" placeholder="License Number">
+    <input type="text" class="form-control" name="license_no" placeholder="License Number" required="">
   </div>
   <div class="form-group">
     <label>Police report (if available)</label>
-    <input type="text" class="form-control" name="report" placeholder="Police Report">
+    <input type="text" class="form-control" name="report" placeholder="Police Report" required="">
   </div>
 
   <button type="submit" class="btn btn-default">Submit</button>
