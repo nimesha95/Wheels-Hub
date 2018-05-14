@@ -1,5 +1,14 @@
 <h2 class="page-header">Register Vehicle</h2>
 <form method="post" action="/register_vehicle">
+
+  <div class="form-group">
+    <label>Owner Name</label>
+    <input type="text" class="form-control" name="owner_name" placeholder="Name of the owner" required="">
+  </div>
+  <div class="form-group">
+    <label>License No</label>
+    <input type="text" class="form-control" name="nic" placeholder="NIC" required="" maxlength="12">
+  </div>
   <div class="form-group">
     <label>Vehicle No</label>
     <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle Number" required="" maxlength="9">

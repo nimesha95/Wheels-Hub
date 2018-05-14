@@ -7,19 +7,19 @@
 <form method="post" action="/users/register">
    <div class="form-group">
     <label>Name</label>
-    <input type="text" class="form-control" placeholder="Name" name="name">
+    <input type="text" class="form-control" placeholder="Name" name="name" required="">
   </div>
   <div class="form-group">
     <label>Username</label>
-    <input type="text" class="form-control" placeholder="Username" name="username">
+    <input type="text" class="form-control" placeholder="Username" name="username" required="">
   </div>
    <div class="form-group">
     <label>Email</label>
-    <input type="email" class="form-control" placeholder="Email" name="email">
+    <input type="email" class="form-control" placeholder="Email" name="email" required="">
   </div>
   <div class="form-group">
     <label>User Type</label>
-    <input class="form-control" list="users" name="users" placeholder="select a user type please">
+    <input class="form-control" list="users" name="users" placeholder="select a user type please" required="">
     <datalist id="users">
       <option value="rmv">
       <option value="insurance">
@@ -28,11 +28,11 @@
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control" placeholder="Password" name="password">
+    <input type="password" class="form-control" placeholder="Password" name="password" required="">
   </div>
   <div class="form-group">
     <label>Confirm Password</label>
-    <input type="password" class="form-control" placeholder="Password" name="password2">
+    <input type="password" class="form-control" placeholder="Password" name="password2" required="">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
