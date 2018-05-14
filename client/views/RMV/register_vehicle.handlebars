@@ -2,31 +2,31 @@
 <form method="post" action="/register_vehicle">
   <div class="form-group">
     <label>Vehicle No</label>
-    <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle Number">
+    <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle Number" required="" maxlength="9">
   </div>
   <div class="form-group">
     <label>Model</label>
-    <input type="text" class="form-control" name="Model" placeholder="Model">
+    <input type="text" class="form-control" name="Model" placeholder="Model" required="" maxlength="21">
   </div>
   <div class="form-group">
     <label>Year of Manufacuture</label>
-    <input type="text" class="form-control" name="yom" placeholder="Year of Manufacture">
+    <input type="text" class="form-control" name="yom" placeholder="Year of Manufacture" required="" maxlength="4">
   </div>
   <div class="form-group">
     <label>Country of Manufacture</label>
-    <input type="text" class="form-control" name="manufacture_country" placeholder="Country of Manufacture">
+    <input type="text" class="form-control" name="manufacture_country" placeholder="Country of Manufacture" required="">
   </div>
   <div class="form-group">
     <label>Chasis No</label>
-    <input type="text" class="form-control" name="chasis_no" placeholder="Chasis Number">
+    <input type="text" class="form-control" name="chasis_no" placeholder="Chasis Number" required="" maxlength="13">
   </div>
   <div class="form-group">
     <label>Engine No</label>
-    <input type="text" class="form-control" name="engine_no" placeholder="Engine Number">
+    <input type="text" class="form-control" name="engine_no" placeholder="Engine Number" required="" maxlength="7">
   </div>
     <div class="form-group">
     <label>Vehicle Color</label>
-    <input type="text" class="form-control" name="color" placeholder="Vehicle Color">
+    <input type="text" class="form-control" name="color" placeholder="Vehicle Color" required="">
   </div>
   <button type="submit" class="btn btn-info">Submit</button>
 </form>
