@@ -789,7 +789,7 @@ margin-right: 15px;
 .discount-offer {
   padding: 120px 0;
   position: relative;
-  background: url(../../assets/images/home/offer-timer.jpg)no-repeat center fixed;
+  background: url(../site_images/home/offer-timer.jpg)no-repeat center fixed;
   background-size: cover;
   z-index: 1;
 }
@@ -1042,7 +1042,7 @@ margin-right: 15px;
 --------------------------------------*/
 .special-offer{
   position: relative;
-  background: url(../images/offer/offer-banner.jpg)no-repeat center;
+  background: url(../site_images/home/offer/offer-banner.jpg)no-repeat center;
   background-size: cover;
   z-index: 1;
 }
@@ -1275,7 +1275,7 @@ margin-right: 15px;
 .subscribe {
   position: relative;
   padding: 120px 0;
-  background: url(../images/home/subscribe-banner.jpg)no-repeat center fixed;
+  background: url(../site_images/home/subscribe-banner.jpg)no-repeat center fixed;
   background-size: cover;
   z-index: 1;
 }
