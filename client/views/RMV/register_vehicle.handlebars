@@ -34,13 +34,40 @@
     <div class="form-group">
     <label>Registration Status</label>
     <input type="text" class="form-control" name="registration_status" placeholder="Registration Status" required="">
+    <datalist id="registration_status">
+      <option value="Locally built">
+      <option value="Recondition">
+      <option value="Brand New">
+      <option value="Bought from Auction">
+      <option value="Other">
+    </datalist>
   </div>
-  <!--1. Locally built 2. Recondition 3. Brand New 4. Bought from Auction 5. Other (Specify)  -->
 
     <div class="form-group">
     <label>Vehicle Type</label>
     <input type="text" class="form-control" name="vehicle type" placeholder="Vehicle Type" required="">
-    <!-- 1. Motor car 2. Three Wheeler Car 3. Jeep 4. Motor Lorry 5. Delivery Van 6. Three Wheeler Van 7. Crane 8. Dump Truck 9. Prime Mover 10. Motor Cycle 11. Hearse 12. Ambulance 13. Dual Purpose Vehicle 14. Hand Tractor 15. Tractor 4 wheel 16. Lorry Trailer 17. Land Vehicle 18. Motor Coach 19. Container Truck 20. Other (Please Specify) -->
+    <datalist id="registration_status">
+      <option value="Motor car">
+      <option value="Three Wheeler Car">
+      <option value="Jeep">
+      <option value="Motor Lorry">
+      <option value="Delivery Van">
+      <option value="Three Wheeler Van">
+      <option value="Crane">
+      <option value="Dump Truck">
+      <option value="Prime Mover">
+      <option value="Motor Cycle">
+      <option value="Hearse">
+      <option value="Ambulance">
+      <option value="Dual Purpose Vehicle ">
+      <option value="Hand Tractor">
+      <option value="Tractor 4 wheel">
+      <option value="Lorry Trailer">
+      <option value="Land Vehicle">
+      <option value="Motor Coach">
+      <option value="Container Truck ">
+      <option value="Other">
+    </datalist>
   </div>
 
   <div class="form-group">
@@ -61,6 +88,7 @@
   <div class="form-group">
     <label>Country of Manufacture</label>
     <input type="text" class="form-control" name="manufacture_country" placeholder="Country of Manufacture" required="">
+
   </div>
 
   <div class="form-group">
@@ -78,5 +106,6 @@
     <input type="text" class="form-control" name="color" placeholder="Vehicle Color" required="">
   </div>
 
-  <button type="submit" class="btn btn-info">Submit</button>
+  <button type="submit" class="btn btn-primary btn-lg col-md-8 col-md-offset-2" style="padding-top:20px;
+    padding-bottom:20px;">Register Vehicle</button>
 </form>
