@@ -1,82 +1,101 @@
-<h2 class="page-header">Register Vehicle</h2>
-<form method="post" action="/register_vehicle">
+<body>
+  <h2 class="page-header" style="margin-top:10%">Register Vehicle</h2>
+  <form method="post" action="/register_vehicle">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default" style="color:black">
+          <div class="panel-body">
+            <div class="form-group">
+              <label>Vehicle No</label>
+              <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle Number" required="" maxlength="9">
+            </div>
 
-  <div class="form-group">
-    <label>Owner Name</label>
-    <input type="text" class="form-control" name="owner_name" placeholder="Full Name of the owner" required="">
-  </div>
+            <div class="form-group">
+              <label>Registration Status</label>
+              <input type="text" class="form-control" name="registration_status" placeholder="Registration Status" required="">
+            </div>
+            <!--1. Locally built 2. Recondition 3. Brand New 4. Bought from Auction 5. Other (Specify)  -->
 
-  <div class="form-group">
-    <label>NIC</label>
-    <input type="text" class="form-control" name="nic" placeholder="NIC" required="" maxlength="12">
-  </div>
+            <div class="form-group">
+              <label>Vehicle Type</label>
+              <input type="text" class="form-control" name="vehicle_type" placeholder="Vehicle Type" required="">
+              <!-- 1. Motor car 2. Three Wheeler Car 3. Jeep 4. Motor Lorry 5. Delivery Van 6. Three Wheeler Van 7. Crane 8. Dump Truck 9. Prime Mover 10. Motor Cycle 11. Hearse 12. Ambulance 13. Dual Purpose Vehicle 14. Hand Tractor 15. Tractor 4 wheel 16. Lorry Trailer 17. Land Vehicle 18. Motor Coach 19. Container Truck 20. Other (Please Specify) -->
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Model</label>
+                  <input type="text" class="form-control" name="Model" placeholder="Model" required="" maxlength="21">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Vehicle Color</label>
+                  <input type="text" class="form-control" name="color" placeholder="Vehicle Color" required="">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Year of Manufacuture</label>
+              <input type="text" class="form-control" name="yom" placeholder="Year of Manufacture" required="" maxlength="4">
+            </div>
 
-  <div class="form-group">
-    <label>Address of Owner</label>
-    <input type="text" class="form-control" name="owner_address" placeholder="Address of Owner" required="" maxlength="9">
-  </div>
+            <div class="form-group">
+              <label>Country of Manufacture</label>
+              <input type="text" class="form-control" name="manufacture_country" placeholder="Country of Manufacture" required="">
+            </div>
 
-  <div class="form-group">
-    <label>License No</label>
-    <input type="text" class="form-control" name="license" placeholder="License" required="">
-  </div>
+            <div class="form-group">
+              <label>Chasis No</label>
+              <input type="text" class="form-control" name="chasis_no" placeholder="Chasis Number" required="" maxlength="13">
+            </div>
 
-  <div class="form-group">
-    <label>Province</label>
-    <input type="text" class="form-control" name="province" placeholder="Province" required="">
-  </div>
+            <div class="form-group">
+              <label>Engine No</label>
+              <input type="text" class="form-control" name="engine_no" placeholder="Engine Number" required="" maxlength="7">
+            </div>
 
-  <div class="form-group">
-    <label>District</label>
-    <input type="text" class="form-control" name="district" placeholder="District" required="">
-  </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="form-group">
-    <label>Registration Status</label>
-    <input type="text" class="form-control" name="registration_status" placeholder="Registration Status" required="">
-  </div>
-  <!--1. Locally built 2. Recondition 3. Brand New 4. Bought from Auction 5. Other (Specify)  -->
+      <div class="col-md-6">
+        <div class="panel panel-default" style="color:black">
+          <div class="panel-body">
+            <div class="form-group">
+              <label>Owner Name</label>
+              <input type="text" class="form-control" name="owner_name" placeholder="Full Name of the owner" required="">
+            </div>
 
-    <div class="form-group">
-    <label>Vehicle Type</label>
-    <input type="text" class="form-control" name="vehicle type" placeholder="Vehicle Type" required="">
-    <!-- 1. Motor car 2. Three Wheeler Car 3. Jeep 4. Motor Lorry 5. Delivery Van 6. Three Wheeler Van 7. Crane 8. Dump Truck 9. Prime Mover 10. Motor Cycle 11. Hearse 12. Ambulance 13. Dual Purpose Vehicle 14. Hand Tractor 15. Tractor 4 wheel 16. Lorry Trailer 17. Land Vehicle 18. Motor Coach 19. Container Truck 20. Other (Please Specify) -->
-  </div>
+            <div class="form-group">
+              <label>NIC</label>
+              <input type="text" class="form-control" name="nic" placeholder="NIC" required="" maxlength="12">
+            </div>
 
-  <div class="form-group">
-    <label>Vehicle No</label>
-    <input type="text" class="form-control" name="vehicle_no" placeholder="Vehicle Number" required="" maxlength="9">
-  </div>
+            <div class="form-group">
+              <label>Address of Owner</label>
+              <input type="text" class="form-control" name="owner_address" placeholder="Address of Owner" required="">
+            </div>
 
-  <div class="form-group">
-    <label>Model</label>
-    <input type="text" class="form-control" name="Model" placeholder="Model" required="" maxlength="21">
-  </div>
+            <div class="form-group">
+              <label>License No</label>
+              <input type="text" class="form-control" name="license" placeholder="License" required="">
+            </div>
 
-  <div class="form-group">
-    <label>Year of Manufacuture</label>
-    <input type="text" class="form-control" name="yom" placeholder="Year of Manufacture" required="" maxlength="4">
-  </div>
+            <div class="form-group">
+              <label>Province</label>
+              <input type="text" class="form-control" name="province" placeholder="Province" required="">
+            </div>
 
-  <div class="form-group">
-    <label>Country of Manufacture</label>
-    <input type="text" class="form-control" name="manufacture_country" placeholder="Country of Manufacture" required="">
-  </div>
-
-  <div class="form-group">
-    <label>Chasis No</label>
-    <input type="text" class="form-control" name="chasis_no" placeholder="Chasis Number" required="" maxlength="13">
-  </div>
-
-  <div class="form-group">
-    <label>Engine No</label>
-    <input type="text" class="form-control" name="engine_no" placeholder="Engine Number" required="" maxlength="7">
-  </div>
-
-    <div class="form-group">
-    <label>Vehicle Color</label>
-    <input type="text" class="form-control" name="color" placeholder="Vehicle Color" required="">
-  </div>
-
-  <button type="submit" class="btn btn-info">Submit</button>
-</form>
+            <div class="form-group">
+              <label>District</label>
+              <input type="text" class="form-control" name="district" placeholder="District" required="">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg col-md-8 col-md-offset-2" style="padding-top:20px;
+    padding-bottom:20px;">Register Vehicle</button>
+      </div>
+    </div>
+  </form>
+</body>
