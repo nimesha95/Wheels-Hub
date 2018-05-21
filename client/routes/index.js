@@ -92,11 +92,14 @@ router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 	var tot = dir + english_no + vehicle_no;
 
 	Vehicle.findOne({ vehicle_no: tot }, function (err, result) {
-		if (err) throw err;
-		console.log(result.link);
-		var res_link = result.link + " ";
-
+		if (err) {
+			req.flash('error_msg', "vehicle not found");
+			console.log(err);
+			res.redirect('/transfer_vehicle');
+		}
+		//console.log(result.link);
 		try {
+			var res_link = result.link + " ";
 			//req.flash('success_msg', decoded.vehicle_info.vehicle.chasis_no);
 			res.redirect('/transfer_vehicle_info/?link=' + res_link);
 		}
@@ -125,21 +128,24 @@ router.post('/register_vehicle', function (req, res) {
 });
 
 router.post('/trasfer_owner', function (req, res) {
-	console.log("global---->"+JSON.stringify(vehicle_global));
-	var key = ""+Date.now();
+	console.log("global---->" + JSON.stringify(vehicle_global));
+	var key = "" + Date.now();
 	var owner_info = {}
 	owner_info[key] = {
-		"name": req.body.owner_name,
+		"name": req.body.transferee_name,
 		"nic": req.body.nic,
+		"owner_address": req.body.transferee_address, "license": req.body.license,
+		"province": req.body.province,
+		"district": req.body.district,
 		"timestamp": Date.now()
 	}
-	console.log("owner_info->"+JSON.stringify(owner_info));
+	console.log("owner_info->" + JSON.stringify(owner_info));
 
 	var vehicle_info = vehicle_global.info.vehicle_info;
 	vehicle_info.owner_info[key] = owner_info;
-	console.log("haha"+JSON.stringify(vehicle_info));
+	console.log("haha" + JSON.stringify(vehicle_info));
 
-	makeChanges(req,vehicle_info.vehicle.vehicle_no+Math.random(),vehicle_info);
+	makeChanges(req, vehicle_info.vehicle.vehicle_no + Math.random(), vehicle_info);
 	//AddOwner(req);
 	//req.flash('success_msg', req.body.vehicle_no);
 	res.redirect('/transfer_vehicle');
@@ -150,22 +156,38 @@ function RegVehicle(req, asset, vehicle_info) {
 		"vehicle": {
 			"chasis_no": req.body.chasis_no, "vehicle_no": req.body.vehicle_no,
 			"Model": req.body.Model, "yom": req.body.yom, "manufacture_country": req.body.manufacture_country,
-			"engine_no": req.body.engine_no, "color": req.body.color
+			"engine_no": req.body.engine_no, "color": req.body.color, "registration_status": req.body.registration_status,
+			"vehicle_type": req.body.vehicle_type
 		},
 		"owner_info": {},
 		"insuarance_claims": {}
 	}
 
+	var key = "" + Date.now();
+	var owner_info = {}
+	owner_info[key] = {
+		"name": req.body.owner_name,
+		"nic": req.body.nic,
+		"owner_address": req.body.owner_address, "license": req.body.license,
+		"province": req.body.province,
+		"district": req.body.district,
+		"timestamp": Date.now()
+	}
+	vehicle_info.owner_info[key] = owner_info;
+	console.log(vehicle_info)
+
 	req.flash('success_msg', "successfully added: " + asset);
+	
 	submitUpdate(
 		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },
 		req.user.private_key,
 		success => success ? this.refresh() : null,
 		asset
 	)
+	
 }
 
-function makeChanges(req, asset, vehicle_info){
+function makeChanges(req, asset, vehicle_info) {
 	req.flash('success_msg', "successfully added: " + asset);
 	submitUpdate_sync(
 		{ action: 'create', asset, vehicle_info, owner: req.user.public_key },

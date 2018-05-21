@@ -71,10 +71,11 @@ router.post('/insurance_claim', function (req, res) {
 
 	Vehicle.findOne({ vehicle_no: tot }, function (err, result) {
 		if (err) throw err;
-		console.log(result.link);
-		var res_link = result.link + " ";
+		//console.log(result.link);
+		
 
 		try {
+			var res_link = result.link + " ";
 			//req.flash('success_msg', decoded.vehicle_info.vehicle.chasis_no);
 			res.redirect('/insurance/insurance_vehicle_info/?link=' + res_link);
 		}
