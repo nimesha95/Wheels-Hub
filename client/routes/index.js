@@ -25,7 +25,7 @@ router.get('/', ensureAuthenticated, function (req, res) {
 		res.render('Insurance/insurance');
 	}
 	else if (req.user.user_type == "gen_user") {
-		res.render('Normal_user/gen_user');
+		res.render('normal_user/gen_user');
 	}
 });
 
