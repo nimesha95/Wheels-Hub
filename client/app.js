@@ -23,8 +23,19 @@ var app = express();
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout:'layout'}));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'layout',
+  helpers: {
+    // Function to do basic mathematical operation in handlebar
+    prettifyDate: function (timestamp) {
+      return new Date(timestamp).toString('yyyy-MM-dd')
+    }
+  }
+}));
 app.set('view engine', 'handlebars');
+
+
+
 
 // BodyParser Middleware
 app.use(bodyParser.json());
@@ -36,9 +47,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
 app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
 }));
 
 // Passport init
@@ -47,18 +58,18 @@ app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
+  errorFormatter: function (param, msg, value) {
+    var namespace = param.split('.')
+      , root = namespace.shift()
       , formParam = root;
 
-    while(namespace.length) {
+    while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg   : msg,
-      value : value
+      param: formParam,
+      msg: msg,
+      value: value
     };
   }
 }));
@@ -79,12 +90,12 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api',api);
-app.use('/insurance',insuarance);
+app.use('/api', api);
+app.use('/insurance', insuarance);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
-app.listen(app.get('port'), function(){
-	console.log('Server started on port '+app.get('port'));
+app.listen(app.get('port'), function () {
+  console.log('Server started on port ' + app.get('port'));
 });
