@@ -92,11 +92,14 @@ router.post('/transfer_vehicle', ensureAuthenticated, function (req, res) {
 	var tot = dir + english_no + vehicle_no;
 
 	Vehicle.findOne({ vehicle_no: tot }, function (err, result) {
-		if (err) throw err;
-		console.log(result.link);
-		var res_link = result.link + " ";
-
+		if (err){
+			req.flash('error_msg', "vehicle not found");
+			console.log(err);
+			res.redirect('/transfer_vehicle');
+		} 
+		//console.log(result.link);
 		try {
+			var res_link = result.link + " ";
 			//req.flash('success_msg', decoded.vehicle_info.vehicle.chasis_no);
 			res.redirect('/transfer_vehicle_info/?link=' + res_link);
 		}
