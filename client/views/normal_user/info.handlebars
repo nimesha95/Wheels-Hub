@@ -1,0 +1,62 @@
+<body>
+    <div class="row" style="margin-top:20%">
+    <div class="col-md-6">
+        <div class="panel panel-default" style="color:black">
+            <div class="panel-body">
+                <h3>Vehicle Meta</h3>
+                {{#each vehicle}}
+                    <p>chasis_no: {{vehicle.chasis_no}}</p>
+                    <p>vehicle_no: {{vehicle.vehicle_no}}</p>
+                    <p>Model: {{vehicle.Model}}</p>
+                    <p>yom: {{vehicle.yom}}</p>
+                    <p>manufacture_country: {{vehicle.manufacture_country}}</p>
+                    <p>engine_no: {{vehicle.engine_no}}</p>
+                    <p>color: {{vehicle.color}}</p>
+                    <p>registration_status: {{vehicle.registration_status}}</p>
+                    <p>vehicle_type: {{vehicle.vehicle_type}}</p>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default" style="color:black">
+            <div class="panel-body">
+                <h3>Previous Owners</h3>
+                {{#each vehicle}} 
+                    {{#each owner_info as |one|}} 
+                        {{#each one as |two|}}
+                            <p>Name: {{two.name}}</p>
+                            <p>NIC: {{two.nic}}</p>
+                            <p>Address: {{two.owner_address}}</p>
+                            <p>Date: {{prettifyDate two.timestamp}}</p>
+                <br>    {{/each}} 
+                    {{/each}} 
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default" style="color:black">
+            <div class="panel-body">
+                <h3>Previous Insuarance Claims</h3>
+                {{#each vehicle}} 
+                    {{#each insuarance_claims as |three|}} 
+                        {{#each three as |four|}}
+                            <p>policy_number: {{four.policy_number}}</p>
+                            <p>description: {{four.description}}</p>
+                            <p>date: {{four.date}}</p>
+                            <p>time: {{four.time}}</p>
+                            <p>name: {{four.name}}</p>
+                            <p>license_no: {{four.license_no}}</p>
+                            <p>report: {{four.report}}</p>
+                            <p>Date_added_to_system: {{prettifyDate four.timestamp}}</p>
+                <br>    {{/each}} 
+                    {{/each}} 
+                {{/each}}
+            </div>
+        </div>    
+    </div>
+</div>
+</body>
