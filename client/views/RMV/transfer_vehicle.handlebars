@@ -1,24 +1,50 @@
 <h2 class="page-header">Tranfer Vehicle</h2>
 <form action="/transfer_vehicle" method="post">
-    <h5>Enter vehicle registration number</h5>
-    <b> Example WP KM 6497 </b>
-    <br>
-    <div class="form-group" style="color:black">
-        <input type="text" list="province" name="vehiclestate" value="" maxlength="2" size="2" id="smallsearchbox" required="">
+    <section>
+        <div class="row">
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-9">
+                <h5>Enter vehicle registration number</h5>
+                <br>
+                <br>
+                <b> Example WP KM 6497 </b>
+
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group" style="color:black">
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" pattern="[A-Za-z]{2}" class="form-control" list="province" name="vehiclestate" value="" maxlength="2" size="2" id="smallsearchbox" required="">
         
-        <datalist id="province">
-      		<option value="WP">
-      		<option value="CP">
-      		<option value="UP">
-      		<option value="SP">
-      		<option value="SE">
-      		<option value="SG">
-      		<option value="NP">
-      		<option value="EP">
-      		<option value="NC">
-    	</datalist>
-        <input type="text" name="vehicleregistration" value="" maxlength="3" size="3" id="smallsearchbox1" required="">
-        <input type="text" name="vehicleno" value="" maxlength="4" size="12" id="medsearchbox" required="">
-    </div>
-    <button type="submit" class="btn btn-info">Find</button>
+                    <datalist id="province">
+      		        <option value="WP">
+                    <option value="CP">
+                    <option value="UP">
+                    <option value="SP">
+                    <option value="SE">
+                    <option value="SG">
+                    <option value="NP">
+                    <option value="EP">
+                    <option value="NC">
+                </datalist>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" pattern="[A-Za-z]{2-3}" class="form-control" name="vehicleregistration" value="" maxlength="3" size="3" id="smallsearchbox1" required="">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" pattern="[0-9]{4}" class="form-control" name="vehicleno" value="" maxlength="4" size="12" id="medsearchbox" required="">
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-info">Find</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </form>
